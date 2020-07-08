@@ -1,28 +1,51 @@
-// Тоглогчийн ээлжийг хадгалах хувьсагч, нэгдүгээр тоглогчийг 0, хоёрдугаар тоглогчийг 1 гэж тэмдэглье.
-var activePlayer = 0;
+// Togloomiin buh gazart ashiglagdah global huvisagchdiig end zarlay.
 
-// Тоглогчдын цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 0];
+// Ali toglogch shoo shideh ve gdgiig end zarlana.
+var activePlayer;
 
-// Toglogchiin eeljindee tsugluulj bgaa onoog hadgalah huvisagch
-var roundScore = 0;
+// hoyor toglogchiin tsugluulsan onoonuud
+var scores;
 
-// Shoonii ali talaar buusniig hadgalah huvisagch heregtei, 1-6 gesen utgiig ene huvisagchid sanamsarguigeer ugnu.
+// idevhtei toglogchiin tsugluulj bgaa eeljiin onoo.
+var roundScore;
 
-var diceNumber = Math.floor(Math.random() * 6) + 1;
-
-// <div class="player-score" id="score-0">43</div>
-// window.document.querySelector("#score-0").textContent = dice;
-// document.querySelector("#score-1").innerHTML = "<em>Yes!<em>";
-
-// program ehlehed beltgey
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
-
+// Shoonii zurgiig uzuuleh elementiig DOM-oos haij olood end hadgalay.
 var diceDom = document.querySelector(".dice");
-diceDom.style.display = "none";
+
+// Togloomiig ehluulne.
+initGame();
+
+// togloomiig shineer ehlehed beltgene.
+function initGame() {
+  // Тоглогчийн ээлжийг хадгалах хувьсагч, нэгдүгээр тоглогчийг 0, хоёрдугаар тоглогчийг 1 гэж тэмдэглье.
+  activePlayer = 0;
+
+  // Тоглогчдын цуглуулсан оноог хадгалах хувьсагч
+  scores = [0, 0];
+
+  // Toglogchiin eeljindee tsugluulj bgaa onoog hadgalah huvisagch
+  roundScore = 0;
+
+  // program ehlehed beltgey
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+
+  // Toglogchdiin neriig butsaaj gargah
+  document.getElementById("name-0").textContent = "Player 1";
+  document.getElementById("name-1").textContent = "Player 2";
+
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
+
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
+
+  document.querySelector(".player-0-panel").classList.add("active");
+
+  diceDom.style.display = "none";
+}
 
 // shoog shideh event listener
 document.querySelector(".btn-roll").addEventListener("click", function () {
@@ -96,3 +119,6 @@ function switchToNextPlayer() {
   // shoog tur alga bolgono
   diceDom.style.display = "none";
 }
+
+// New game buyu Shine togloom ehluuleh tovchnii event listener
+document.querySelector(".btn-new").addEventListener("click", initGame);
